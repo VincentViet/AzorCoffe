@@ -25,7 +25,7 @@ public class Scene implements IView{
     @FXML
     private Label               statusBar;
 
-    private IPresenter presenter;
+    private Presenter presenter;
 
     public Scene(){
         presenter = new Presenter(this);

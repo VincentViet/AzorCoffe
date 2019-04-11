@@ -1,6 +1,8 @@
 package com.azor.login;
 
 import com.azor.utils.*;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,7 +20,7 @@ public class Presenter implements IPresenter {
                                 .query(String.format("SELECT password " +
                                         "FROM Accounts " +
                                         "WHERE username = '%s' " +
-                                        "OR email = '%s';", username, username));
+                                        "OR email = '%s';", username, password));
             if (result.first() &&
                     result.getString(1).equals(password)){
                 loginView.successful();
@@ -26,6 +28,8 @@ public class Presenter implements IPresenter {
                 loginView.failure();
 
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
