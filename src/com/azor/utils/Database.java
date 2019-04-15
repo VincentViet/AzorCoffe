@@ -18,7 +18,7 @@ public class Database {
     private Database()
             throws SQLException, ClassNotFoundException, IOException {
 
-        Properties properties = ConfigsReader.getInstance().load("dbConfig.properties");
+        Properties properties = ConfigsReader.getInstance().load("com/azor/database_config/dbConfig.properties");
         String dbName = properties.getProperty("dbname");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");
