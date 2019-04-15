@@ -128,12 +128,12 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="212.0" layoutY="14.0" text="Bàn X" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="211.0" AnchorPane.topAnchor="14.0">
+                              <Label fx:id="lb_TableName" layoutX="212.0" layoutY="14.0" text="Bàn X" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="211.0" AnchorPane.topAnchor="14.0">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="34.0" layoutY="67.0" text="Status: Đang phục vụ">
+                              <Label fx:id="lb_TableStatus" layoutX="34.0" layoutY="67.0" text="Status: Đang phục vụ">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

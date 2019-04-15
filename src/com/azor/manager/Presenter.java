@@ -25,4 +25,9 @@ class Presenter implements IPresenter {
     public void close() {
         Platform.exit();
     }
+
+    @Override
+    public void thanhtoan() {
+
+    }
 }
