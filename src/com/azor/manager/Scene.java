@@ -35,7 +35,7 @@ public class Scene implements IView, Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private JFXListView lvInvoice;
+    private JFXListView<String> lvInvoice;
     @FXML
     private JFXButton placeholder;
 
@@ -85,7 +85,7 @@ public class Scene implements IView, Initializable {
                 }
             });
 
-            placeholder.setOnMouseClicked(event ->{presenter.invoice();});
+            placeholder.setOnMouseClicked(event ->{presenter.invoice(lvInvoice);});
 
 
         } catch (IOException e) {

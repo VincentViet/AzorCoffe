@@ -75,4 +75,5 @@ insert into Bill values (100000, 2019/4/16);
 insert into Bill values (200000, 2019/3/16);
 
 -- Bảng BillDetail
-insert into BillDetail values (1, "Trà sữa
+insert into BillDetail values (1, 1, 1); -- Bill thứ 1, Product thứ 1, count 1
+insert into BillDetail values (1, 2, 2);

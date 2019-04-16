@@ -1,6 +1,7 @@
 package com.azor.manager;
 
 import com.azor.AzorCoffee;
+import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 
 class Presenter implements IPresenter {
@@ -27,7 +28,7 @@ class Presenter implements IPresenter {
     }
 
     @Override
-    public void invoice() {
+    public void invoice(JFXListView<String> Invoice ) {
 
     }
 
