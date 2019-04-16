@@ -18,7 +18,7 @@ public class Presenter implements IPresenter {
         try {
             ResultSet result = Database.getInstance()
                                 .query(String.format("SELECT password " +
-                                        "FROM Accounts " +
+                                        "FROM Account " +
                                         "WHERE username = '%s' " +
                                         "OR email = '%s';", username, password));
             if (result.first() &&

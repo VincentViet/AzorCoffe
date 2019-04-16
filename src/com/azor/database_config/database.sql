@@ -67,7 +67,7 @@ values ("NguyenXuanAn", "123456", "abc@gmail.com", "Nguyễn Xuân An", 77465715
 insert into Category (name)
 values ("Trà");
 insert into Category (name)
- values ("Đá xay");
+values ("Đá xay");
 
 -- Bảng Product
 insert into Product (name, id_category, price)
