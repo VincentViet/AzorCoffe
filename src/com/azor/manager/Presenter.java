@@ -27,7 +27,8 @@ class Presenter implements IPresenter {
     }
 
     @Override
-    public void thanhtoan() {
+    public void invoice() {
 
     }
+
 }

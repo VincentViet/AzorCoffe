@@ -1,7 +1,9 @@
 package com.azor.manager;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
@@ -32,6 +34,10 @@ public class Scene implements IView, Initializable {
     private JFXDrawer drawer;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private JFXListView lvInvoice;
+    @FXML
+    private JFXButton placeholder;
 
     private IPresenter presenter;
 
@@ -78,6 +84,8 @@ public class Scene implements IView, Initializable {
                     drawer.close();
                 }
             });
+
+            placeholder.setOnMouseClicked(event ->{presenter.invoice();});
 
 
         } catch (IOException e) {
