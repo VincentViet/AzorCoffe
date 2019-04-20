@@ -1,7 +1,7 @@
 package com.azor.models;
 
 public class TableFood {
-    private int id;
+    private int tablefood_id;
     private int number;
     private String status;
 
@@ -10,13 +10,13 @@ public class TableFood {
     }
 
     public TableFood(int id, int number, String status){
-        this.id=id;
+        this.tablefood_id=id;
         this.number=number;
         this.status=status;
     }
 
     public int getId(){
-        return id;
+        return tablefood_id;
     }
 
     public int getNumber() {

@@ -1,42 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="Backgroud" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manager.Scene">
    <children>
-      <VBox prefHeight="720.0" prefWidth="128.0" styleClass="MainMenu" stylesheets="@../css/main.css">
-         <children>
-            <HBox prefHeight="108.0" prefWidth="128.0" />
-            <HBox prefHeight="72.0" prefWidth="128.0" styleClass="MainPanel" stylesheets="@../css/main.css" />
-            <HBox prefHeight="72.0" prefWidth="128.0" styleClass="MainPanel" />
-            <HBox prefHeight="72.0" prefWidth="128.0" styleClass="MainPanel" />
-            <HBox prefHeight="324.0" prefWidth="128.0" />
-            <HBox prefHeight="72.0" prefWidth="128.0" styleClass="MainPanel" stylesheets="@../css/main.css" />
-         </children>
-      </VBox>
-      <VBox layoutX="896.0" prefHeight="720.0" prefWidth="384.0" styleClass="MainPanel" stylesheets="@../css/main.css">
-         <children>
-            <HBox prefHeight="108.0" prefWidth="128.0" />
-            <JFXTreeTableView prefHeight="504.0" prefWidth="384.0" stylesheets="@../css/main.css" />
-            <HBox prefHeight="108.0" prefWidth="200.0" />
-         </children>
-      </VBox>
-      <HBox layoutX="128.0" prefHeight="54.0" prefWidth="768.0" styleClass="SecondaryMenu" stylesheets="@../css/main.css">
-         <children>
-            <VBox prefHeight="72.0" prefWidth="96.0" styleClass="Selection" stylesheets="@../css/main.css" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-            <VBox prefHeight="72.0" prefWidth="96.0" />
-         </children>
-      </HBox>
-      <JFXButton fx:id="placeholder" layoutX="284.0" layoutY="181.0" AnchorPane.leftAnchor="284.0" AnchorPane.topAnchor="181.0" />
+      <BorderPane fx:id="borderPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/titlebutton.css">
+         <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXHamburger fx:id="hamburger" prefHeight="20.0" prefWidth="30.0">
+                     <HBox.margin>
+                        <Insets right="1175.0" />
+                     </HBox.margin>
+                  </JFXHamburger>
+                  <FontAwesomeIconView fx:id="minimizeButton" fill="#868e96" fontSmoothingType="LCD" glyphName="MINUS_CIRCLE" onMouseClicked="#minimize" size="1.2em" styleClass="title-button">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView fx:id="maximizeButton" fill="#868e96" fontSmoothingType="LCD" glyphName="CIRCLE" onMouseClicked="#maximize" size="1.2em" styleClass="title-button">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView fx:id="closeButton" fill="#ffc107" fontSmoothingType="LCD" glyphName="CLOSE" onMouseClicked="#close" size="1.2em" styleClass="title-button">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIconView>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="809.0" minWidth="10.0" prefWidth="764.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="512.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="placeholder">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="340.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="555.0" minHeight="10.0" prefHeight="455.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="555.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lb_TableName" layoutX="212.0" layoutY="14.0" text="Bàn X" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="211.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lb_TableStatus" layoutX="34.0" layoutY="67.0" text="Status: Đang phục vụ">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <JFXListView fx:id="lvInvoice" GridPane.rowIndex="1" />
+                        <GridPane GridPane.rowIndex="2">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXButton buttonType="RAISED" text="Gọi món">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" text="Thanh toán" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="270.0" disable="true" prefHeight="720.0" prefWidth="256.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1024.0" AnchorPane.topAnchor="31.0" />
    </children>
 </AnchorPane>

@@ -8,9 +8,9 @@ public class Bill {
     private GregorianCalendar date_check_in;
     private int tablefood_id;
 
-    Bill(){}
+    public Bill(){}
 
-    Bill(int bill_id, int sub_total, GregorianCalendar date_check_in, int tablefood_id){
+    public Bill(int bill_id, int sub_total, GregorianCalendar date_check_in, int tablefood_id){
         this.bill_id= bill_id;
         this.sub_total= sub_total;
         this.date_check_in= date_check_in;

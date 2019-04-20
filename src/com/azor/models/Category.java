@@ -4,9 +4,9 @@ public class Category {
     private int category_id;
     private String name;
 
-    Category(){}
+    public Category(){}
 
-    Category(int category_id, String name){
+    public Category(int category_id, String name){
         this.category_id=category_id;
         this.name= name;
     }

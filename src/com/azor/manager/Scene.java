@@ -85,9 +85,6 @@ public class Scene implements IView, Initializable {
                 }
             });
 
-            placeholder.setOnMouseClicked(event ->{presenter.invoice(lvInvoice);});
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
