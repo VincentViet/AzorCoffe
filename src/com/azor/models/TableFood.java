@@ -1,15 +1,15 @@
 package com.azor.models;
 
-public class Table {
+public class TableFood {
     private int id;
     private int number;
     private String status;
 
-    public Table(){
+    public TableFood(){
 
     }
 
-    public Table(int id, int number, String status){
+    public TableFood(int id, int number, String status){
         this.id=id;
         this.number=number;
         this.status=status;

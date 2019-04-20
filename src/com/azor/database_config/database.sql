@@ -1,67 +1,67 @@
-create database azorcoffee
-use azorcoffee
+create database azorcoffee;
+use azorcoffee;
 
 -- Tạo bảng tài khoản
 create table Account(
-	id int NOT NULL AUTO_INCREMENT,
+	account_id int NOT NULL AUTO_INCREMENT,
 	username varchar(30) unique,
     password varchar(20),
 	email varchar(50),
     full_name nvarchar(30),
-    phone int,
-    primary key(id)
+    primary key(account_id)
 );
 
 -- Tạo bảng danh mục sản phẩm
 create table Category(
-	id int not null auto_increment,
+	category_id int not null auto_increment,
     name nvarchar (50),
-    primary key(id)
+    primary key(category_id)
 );
 
 -- Tạo bảng sản phẩm
-create table Product(
-	id int not null auto_increment,
+create table Food(
+	food_id int not null auto_increment,
     name nvarchar(50),
-    id_category int,
+    category_id int,
     price int,
-    primary key(id),
-    foreign key(id_category) references Category(id)
+    primary key(food_id),
+    foreign key(category_id) references Category(category_id)
 );
 
 -- Tạo bảng danh sách bàn ăn
 create table TableFood(
-	id int not null auto_increment,
+	tablefood_id int not null auto_increment,
     name nvarchar(50) default "bàn chưa có tên",
-    status nvarchar(20) default "trống",
-    primary key(id)
+    status bit, -- 0 là trống, 1 là đã có khách
+    primary key(tablefood_id)
 );
 
--- Tạo bảng hóa đơn
+-- Tạo bảng hóa đơn	
 create table Bill(
-	id int not null auto_increment,
-    tong_tien int,
-    ngay_xuat_hoa_don date,
-    table_id int,
-    primary key(id),
-    foreign key (table_id) references TableFood(id)
+	bill_id int not null auto_increment,
+    sub_total int default 0,
+    date_check_in date,
+    tablefood_id int,
+    status bit, -- 0 là chưa thanh toán, 1 là đã thanh toán. 1 bàn trong 1 thời điểm buộc chỉ có 1 hóa đơn chưa thanh toán
+    primary key(bill_id),
+    foreign key (tablefood_id) references TableFood(tablefood_id)
 );
 
 -- Tạo bảng chi tiết hóa đơn
 create table BillDetail(
-	id int not null auto_increment,
+	billdetail_id int not null auto_increment,
     bill_id int,
     food_id int,
     count int,
-    primary key(id),
-	foreign key	(bill_id) references Bill(id),
-    foreign key (food_id) references Product(id)
+    primary key(billdetail_id),
+	foreign key	(bill_id) references Bill(bill_id),
+    foreign key (food_id) references Food(food_id)
 );
 
 -- Insert dữ liệu mẫu:
 -- Bảng Account:
-insert into Account(username, password, email, full_name, phone) 
-values ("NguyenXuanAn", "123456", "abc@gmail.com", "Nguyễn Xuân An", 774657158);
+insert into Account(username, password, email, full_name) 
+values ("NguyenXuanAn", "123456", "abc@gmail.com", "Nguyễn Xuân An");
 
 -- Bảng Category
 insert into Category (name)
@@ -77,13 +77,13 @@ values ("Chocolate đá xay", 2, 40000);
 
 -- Bảng TableFood
 insert into TableFood (name, status)
-values ("Bàn 1", "Trống");
+values ("Bàn 1", "1");
 
 -- Bảng Bill
-insert into Bill (tong_tien, ngay_xuat_hoa_don, table_id)
-values (100000, 2019/4/16, 1);
-insert into Bill (tong_tien, ngay_xuat_hoa_don, table_id)
-values (200000, 2019/3/16, 1);
+insert into Bill (sub_total, date_check_in, tablefood_id, status)
+values (100000, "2019-4-16", 1, 0);
+insert into Bill (sub_total, date_check_in, tablefood_id, status)
+values (200000, "2019-3-16", 1, 1);
 
 -- Bảng BillDetail
 insert into BillDetail (bill_id, food_id, count)

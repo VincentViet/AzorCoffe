@@ -1,0 +1,23 @@
+.MainMenu{
+    -fx-background-color: #b53d00;
+}
+
+.MainPanel{
+    -fx-background-color: #ef6c00;
+}
+
+.SecondaryMenu{
+    -fx-background-color: #ff9d3f;
+}
+
+.Selection{
+    -fx-background-color: #fdd835;
+}
+
+.TreeTableView{
+    -fx-background-color: #ffff6b;
+}
+
+.Backgroud{
+    -fx-background-color: E5E5E5;
+}

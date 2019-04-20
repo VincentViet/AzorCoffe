@@ -1,21 +1,25 @@
 package com.azor.models;
 
-public class Accounts {
+public class Account {
+    private int account_id;
     private String username;
-    private String email;
     private String password;
+    private String email;
     private String full_name;
-    private String phone;
 
-    public Accounts(String user_name, String email, String password, String full_name, String phone) {
-        this.username = user_name;
+    public Account(int accout_id, String username, String email, String password, String full_name) {
+        this.account_id=accout_id;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.full_name = full_name;
-        this.phone = phone;
     }
 
-    public Accounts() {
+    public Account() {
+    }
+
+    public int getAccount_id() {
+        return account_id;
     }
 
     public String getUsername() {
@@ -34,16 +38,12 @@ public class Accounts {
         return full_name;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
     public String toString(){
         return String.format(
+                        "account_id:   %s\n" +
                         "username:  %s\n" +
                         "email:     %s\n" +
                         "password:  %s\n" +
-                        "fullname:  %s\n" +
-                                "phone: %s\n", username, email, password, full_name, phone);
+                        "full_name:  %s\n", account_id, username, email, password, full_name);
     }
 }

@@ -1,16 +1,16 @@
 package com.azor.models;
 
-public class Breakfasts {
-    private int     id;
+public class Food {
+    private int     food_id;
     private String  name;
-    private int     price;
     private int     category_id;
+    private int     price;
 
-    public Breakfasts() {
+    public Food() {
     }
 
     public int getId() {
-        return id;
+        return food_id;
     }
 
     public String getName() {
@@ -25,8 +25,8 @@ public class Breakfasts {
         return category_id;
     }
 
-    public Breakfasts(int id, String name, int price, int category_id) {
-        this.id = id;
+    public Food(int food_id, String name, int price, int category_id) {
+        this.food_id = food_id;
         this.name = name;
         this.price = price;
         this.category_id = category_id;
