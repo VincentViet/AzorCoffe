@@ -34,13 +34,23 @@ class Presenter implements IPresenter {
 
     @Override
     // Xuất hóa đơn
-    public void invoice(JFXListView<String> Invoice ) {
+    public void Invoice(JFXListView<String> Invoice) {
         try {
-            ResultSet result= Database.getInstance().query(String.format("Select * from billdetail"));
-            result.first();
-            BillDetail billDetail= new BillDetail(result.getInt(1), result.getInt(2), result.getInt(3), result.getInt(5));
-            Invoice.getItems().add(billDetail.toString());
-            //Invoice=new JFXListView<String>(billDetail.toString());
+            ResultSet bill_id_result= Database.getInstance()
+                    .query(String.format("SELECT bill_id " +
+                            "FROM bill " +
+                            "WHERE tablefood_id = 1 and status = 0 " ));
+            bill_id_result.first();
+            String bill_id= bill_id_result.getString(1);
+            System.out.println(bill_id);
+            ResultSet bill_detail_result =Database.getInstance()
+                    .query(String.format("select * " +
+                            "from billdetail " +
+                            "where bill_id = '%s' ", bill_id));
+            while (bill_detail_result.next()){
+                BillDetail temp= new BillDetail(bill_detail_result.getInt(1),bill_detail_result.getInt(2), bill_detail_result.getInt(3),bill_detail_result.getInt(4));
+                Invoice.getItems().add(temp.toString());
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -6,5 +6,5 @@ interface IPresenter {
     void minimize();
     void maximize();
     void close();
-    void invoice(JFXListView<String> Invoice);
+    void Invoice(JFXListView<String> Invoice);
 }

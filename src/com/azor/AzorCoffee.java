@@ -25,6 +25,7 @@ public class AzorCoffee extends Application {
     public static Scene     loginScene;
     public static Scene     managerScene;
     public static Stage     primaryStage;
+    public static Scene     dashboardUIBetaScene;
 
 
     @Override
@@ -59,12 +60,15 @@ public class AzorCoffee extends Application {
             managerScene = new Scene(manager);
             managerScene.getStylesheets().add(getClass().getResource("css/tablink.css").toExternalForm());
 
-            primaryStage.setScene(loginScene);
+            Parent dashboard = FXMLLoader.load(getClass().getResource("DashboardUIBeta/DashboardUIBeta.fxml"));
+            dashboardUIBetaScene= new Scene(dashboard);
+
+            primaryStage.setScene(dashboardUIBetaScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.centerOnScreen();
         primaryStage.show();
 

@@ -64,11 +64,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="placeholder">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </JFXButton>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="placeholder" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0" />
+                     </children>
+                  </AnchorPane>
                   <GridPane GridPane.columnIndex="1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

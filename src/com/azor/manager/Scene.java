@@ -58,6 +58,7 @@ public class Scene implements IView, Initializable {
         presenter.minimize();
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try{
@@ -84,6 +85,8 @@ public class Scene implements IView, Initializable {
                     drawer.close();
                 }
             });
+
+            placeholder.setOnMouseClicked(event -> {presenter.Invoice(lvInvoice);});
 
         } catch (IOException e) {
             e.printStackTrace();

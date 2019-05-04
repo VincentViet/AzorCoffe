@@ -6,7 +6,10 @@ public class Food {
     private int     category_id;
     private int     price;
 
-    public Food() {
+    public Food(String name, int category_id, int price) {
+        this.name = name;
+        this.category_id = category_id;
+        this.price = price;
     }
 
     public int getId() {
