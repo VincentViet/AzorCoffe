@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1105.0" stylesheets="@.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manage.homeContent.View">
+   <children>
+      <JFXListView fx:id="tables" prefHeight="775.0" prefWidth="200.0" />
+      <VBox alignment="TOP_CENTER" layoutX="200.0" prefHeight="775.0" prefWidth="906.0">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="906.0">
+               <children>
+                  <JFXComboBox fx:id="categories" prefHeight="49.0" prefWidth="200.0" promptText="Categories">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <JFXComboBox fx:id="drinks" prefHeight="55.0" prefWidth="200.0" promptText="Drink">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <JFXComboBox fx:id="counts" prefHeight="60.0" prefWidth="80.0" promptText="Count" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="405.0">
+                     <children>
+                        <JFXButton fx:id="addButton" prefHeight="50.0" prefWidth="50.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
+                           <HBox.margin>
+                              <Insets right="50.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <JFXTreeTableView fx:id="billInfo" prefHeight="650.0" prefWidth="906.0">
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="total" alignment="CENTER" prefHeight="88.0" prefWidth="198.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="Ubuntu Mono Bold" size="30.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

@@ -1,17 +1,17 @@
 package com.azor;
 
-import com.azor.utils.Database;
+import com.azor.models.Account;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.stage.StageStyle;
-import javafx.application.Application;
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class AzorCoffee extends Application {
 
@@ -22,44 +22,49 @@ public class AzorCoffee extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    public static Scene     loginScene;
-    public static Scene     managerScene;
+    public static Map<String, FXMLLoader> fxmlMap;
+    public static Map<String, Scene> sceneMap;
     public static Stage     primaryStage;
 
+    public static Account currentAuth;
 
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
+        fxmlMap = new HashMap<>();
+        sceneMap = new HashMap<>();
+
         try {
-            Parent login = FXMLLoader.load(getClass().getResource("login/login.fxml"));
-            login.setOnMousePressed(event -> {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            });
-            login.setOnMouseDragged(event -> {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            });
-            login.setOnKeyPressed(event -> {
-                if (event.getCode() == KeyCode.ESCAPE){
-                    Platform.exit();
+            fxmlMap.put("login", new FXMLLoader(getClass().getResource("login/.fxml")));
+            fxmlMap.put("manage", new FXMLLoader(getClass().getResource("manage/.fxml")));
+
+            for (Map.Entry<String, FXMLLoader> fxml:
+                 fxmlMap.entrySet()) {
+                Parent root = fxml.getValue().load();
+                if (fxml.getKey().equals("login")){
+                    root.setOnKeyPressed(event -> {
+                        if (event.getCode() == KeyCode.ESCAPE)
+                            Platform.exit();
+                    });
                 }
-            });
-            loginScene = new Scene(login);
 
-            Parent manager = FXMLLoader.load(getClass().getResource("manager/manager.fxml"));
-            manager.setOnMousePressed(event -> {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            });
-            manager.setOnMouseDragged(event -> {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            });
-            managerScene = new Scene(manager);
-            managerScene.getStylesheets().add(getClass().getResource("css/tablink.css").toExternalForm());
+                root.setOnMousePressed(event -> {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                });
 
-            primaryStage.setScene(loginScene);
+                root.setOnMouseReleased(event -> primaryStage.setOpacity(1.0));
+
+                root.setOnMouseDragged(event -> {
+                    primaryStage.setX(event.getScreenX() - xOffset);
+                    primaryStage.setY(event.getScreenY() - yOffset);
+                    primaryStage.setOpacity(0.7);
+                });
+
+                sceneMap.put(fxml.getKey(), new Scene(root));
+            }
+
+            primaryStage.setScene(sceneMap.get("login"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,11 +72,5 @@ public class AzorCoffee extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.centerOnScreen();
         primaryStage.show();
-
-    }
-
-    @Override
-    public void stop() throws Exception{
-        Database.getInstance().close();
     }
 }

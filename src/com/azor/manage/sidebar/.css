@@ -1,0 +1,26 @@
+.button{
+    -fx-background-color: transparent;
+}
+
+.button:hover{
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 0px 5px 0px 0px;
+    -fx-border-color: #6747cd;
+    -fx-cursor: hand;
+}
+
+.button-selected{
+    -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 0px 5px 0px 0px;
+    -fx-border-color: #6747cd;
+    -fx-cursor: hand;
+}
+
+.sidebar{
+    -fx-border-style: solid;
+    -fx-border-width: 0px 1px 0px 0px;
+    -fx-border-color: grey;
+    -fx-background-color: white;
+}
