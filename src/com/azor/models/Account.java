@@ -1,25 +1,30 @@
 package com.azor.models;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Account {
+public class Account extends RecursiveTreeObject<Account> {
     private int id;
-    private String username;
-    private String email;
-    private String fullname;
-    private String address;
-    private String telphone;
+    private StringProperty username;
+    private StringProperty email;
+    private StringProperty password;
+    private StringProperty fullname;
+    private StringProperty address;
+    private StringProperty telphone;
     private int type;
 
     public Account(ResultSet set){
         try {
             id = set.getInt("id");
-            username = set.getString("username");
-            email = set.getString("email");
-            fullname = set.getString("fullname");
-            address = set.getString("address");
-            telphone = set.getString("telphone");
+            username = new SimpleStringProperty(set.getString("username"));
+            email = new SimpleStringProperty(set.getString("email"));
+            fullname = new SimpleStringProperty(set.getString("fullname"));
+            address = new SimpleStringProperty(set.getString("address"));
+            telphone = new SimpleStringProperty(set.getString("telphone"));
             type = set.getInt("type");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,22 +36,48 @@ public class Account {
     }
 
     public String getUsername() {
-        return username;
+        return username.get();
     }
 
     public String getEmail() {
-        return email;
+        return email.get();
     }
 
     public String getFullname() {
-        return fullname;
+        return fullname.get();
     }
 
     public String getAddress() {
-        return address;
+        return address.get();
     }
 
     public String getTelphone() {
+        return telphone.get();
+    }
+
+    public String getPassword(){ return password.get();}
+
+    public StringProperty usernameProperty(){
+        return username;
+    }
+
+    public StringProperty emailProperty(){
+        return email;
+    }
+
+    public StringProperty passwordProperty(){
+        return password;
+    }
+
+    public StringProperty fullnameProperty(){
+        return fullname;
+    }
+
+    public StringProperty addressProperty(){
+        return address;
+    }
+
+    public StringProperty telphoneProperty(){
         return telphone;
     }
 

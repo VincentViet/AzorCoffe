@@ -43,7 +43,7 @@ public class View implements Initializable {
     }
 
     public void loadAuthInformation(){
-        fullname.setText(AzorCoffee.currentAuth.getFullname());
+        fullname.setText(AzorCoffee.currentAuth.getFullname().toString());
         email.setText(AzorCoffee.currentAuth.getEmail());
         address.setText(AzorCoffee.currentAuth.getAddress());
         phone.setText(AzorCoffee.currentAuth.getTelphone());
