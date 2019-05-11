@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -28,10 +30,15 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="100.0">
                <children>
-                  <JFXButton text="Add" />
+                  <JFXButton fx:id="addButton" text="Add" />
                </children>
             </VBox>
          </children></HBox>
-      <JFXTreeTableView fx:id="treeTableView" layoutY="150.0" prefHeight="625.0" prefWidth="1105.0" />
+      <AnchorPane layoutY="150.0" prefHeight="625.0" prefWidth="1105.0">
+         <children>
+            <JFXTreeTableView fx:id="treeTableView" prefHeight="625.0" prefWidth="1105.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXDrawer fx:id="drawerAdd" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

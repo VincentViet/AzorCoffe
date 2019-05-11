@@ -22,6 +22,7 @@ public class Account extends RecursiveTreeObject<Account> {
             id = set.getInt("id");
             username = new SimpleStringProperty(set.getString("username"));
             email = new SimpleStringProperty(set.getString("email"));
+            password = new SimpleStringProperty(set.getString("password"));
             fullname = new SimpleStringProperty(set.getString("fullname"));
             address = new SimpleStringProperty(set.getString("address"));
             telphone = new SimpleStringProperty(set.getString("telphone"));
@@ -29,6 +30,15 @@ public class Account extends RecursiveTreeObject<Account> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Account(String username, String email, String password, String fullname, String address, String telphone) {
+        this.username = new SimpleStringProperty(username);
+        this.email = new SimpleStringProperty(email);
+        this.password = new SimpleStringProperty(password);
+        this.fullname = new SimpleStringProperty(fullname);
+        this.address = new SimpleStringProperty(address);
+        this.telphone = new SimpleStringProperty(telphone);
     }
 
     public int getId() {

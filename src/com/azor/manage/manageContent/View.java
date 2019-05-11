@@ -2,21 +2,26 @@ package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
 import com.azor.utils.Database;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,13 +38,25 @@ public class View implements Initializable {
     @FXML
     private JFXButton deleteButton;
 
-    Presenter presenter;
+    @FXML
+    private JFXButton addButton;
+
+    @FXML
+    private JFXDrawer drawerAdd;
+
+    Presenter presenter = new Presenter();
+
+//    @FXML
+//    private void toggleDrawer(){
+//        drawerAdd.toggle();
+//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Initialize tree table view collumns
         JFXTreeTableColumn<Account, String> username = new JFXTreeTableColumn<>("Username");
-        username.setPrefWidth(175);
+        username.setPrefWidth(150);
         username.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -47,6 +64,16 @@ public class View implements Initializable {
             }
         });
         username.setStyle("-fx-alignment: center");
+
+        JFXTreeTableColumn<Account, String> password = new JFXTreeTableColumn<>("Password");
+        password.setPrefWidth(150);
+        password.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
+                return param.getValue().getValue().passwordProperty();
+            }
+        });
+        password.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> email = new JFXTreeTableColumn<>("Email");
         email.setPrefWidth(250);
@@ -59,7 +86,7 @@ public class View implements Initializable {
         email.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> fullname = new JFXTreeTableColumn<>("Full name");
-        fullname.setPrefWidth(175);
+        fullname.setPrefWidth(150);
         fullname.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -69,7 +96,7 @@ public class View implements Initializable {
         fullname.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> address = new JFXTreeTableColumn<>("Address");
-        address.setPrefWidth(250);
+        address.setPrefWidth(253);
         address.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -79,7 +106,7 @@ public class View implements Initializable {
         address.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> telphone = new JFXTreeTableColumn<>("Telephone Number");
-        telphone.setPrefWidth(175);
+        telphone.setPrefWidth(150);
         telphone.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -88,18 +115,35 @@ public class View implements Initializable {
         });
         telphone.setStyle("-fx-alignment: center");
 
-        presenter = new Presenter();
-
+        // Initialize tree table view items
         listItem = presenter.initItem();
 
+        // Create tree
         final TreeItem<Account> root = new RecursiveTreeItem<Account>(listItem, RecursiveTreeObject::getChildren);
-        treeTableView.getColumns().setAll(username, email, fullname, address, telphone);
+        treeTableView.getColumns().setAll(username, password, email, fullname, address, telphone);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
+
+        // Set addButton on click event
+        addButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                drawerAdd.toggle();
+            }
+        });
+
+        // Load UI drawer.fxml to drawerAdd
+        try {
+            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawer.fxml"));
+            drawerAdd.setSidePane(drawerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+
     @FXML
-    private void deleteRow(){
+    private void deleteRow() {
 //        Account currentSelected= treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
 //        presenter.deleteRowInDatabase(currentSelected);
 
