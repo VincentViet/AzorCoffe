@@ -28,17 +28,22 @@ public class Presenter {
         return accounts;
     }
 
-//    public void deleteRowInDatabase(Account account){
-//        String query = "Delete from account where username = ?";
-//        PreparedStatement temp = null;
-//        try {
-//            temp = Database.getInstance().getConnection().prepareStatement(query);
-//            temp.setString(1,account.getUsername());
-//            temp.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+//    public void addToDatabase(Account account){
+//        String query
+//
 //    }
+
+    public void deleteRowInDatabase(Account account){
+        String query = "Delete from account where username = ?";
+        PreparedStatement temp = null;
+        try {
+            temp = Database.getInstance().getConnection().prepareStatement(query);
+            temp.setString(1,account.getUsername());
+            temp.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void deleteRowInTable(Account account){
 

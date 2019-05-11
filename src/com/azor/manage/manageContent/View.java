@@ -1,31 +1,22 @@
 package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
-import com.azor.utils.Database;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ResourceBundle;
 
 public class View implements Initializable {
@@ -136,10 +127,14 @@ public class View implements Initializable {
 
     @FXML
     private void deleteRow() {
-//        Account currentSelected= treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
-//        presenter.deleteRowInDatabase(currentSelected);
+        Account currentSelected= treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
+        presenter.deleteRowInDatabase(currentSelected);
+        deleteRowInTreeTableView(currentSelected);
 
-        listItem.remove(treeTableView.getSelectionModel().selectedItemProperty().get().getValue());
+    }
+
+    private void deleteRowInTreeTableView(Account account){
+        listItem.remove(account);
         final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
     }

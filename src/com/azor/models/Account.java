@@ -39,6 +39,7 @@ public class Account extends RecursiveTreeObject<Account> {
         this.fullname = new SimpleStringProperty(fullname);
         this.address = new SimpleStringProperty(address);
         this.telphone = new SimpleStringProperty(telphone);
+        this.type = 1;
     }
 
     public int getId() {
