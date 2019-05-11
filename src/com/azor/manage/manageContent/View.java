@@ -46,10 +46,10 @@ public class View implements Initializable {
 
     Presenter presenter = new Presenter();
 
-//    @FXML
-//    private void toggleDrawer(){
-//        drawerAdd.toggle();
-//    }
+    @FXML
+    private void toggleDrawer(){
+        drawerAdd.toggle();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -123,14 +123,6 @@ public class View implements Initializable {
         treeTableView.getColumns().setAll(username, password, email, fullname, address, telphone);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
-
-        // Set addButton on click event
-        addButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                drawerAdd.toggle();
-            }
-        });
 
         // Load UI drawer.fxml to drawerAdd
         try {
