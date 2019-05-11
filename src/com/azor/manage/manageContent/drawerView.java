@@ -42,6 +42,15 @@ public class drawerView {
         String telphone = tfPhoneNumber.getText().toString();
         Account account = new Account(username, email, password, fullname, address, telphone);
         view.addCurrentData(account);
+    }
 
+    @FXML
+    private void resetTextField(){
+        tfUsername.setText("");
+        tfEmail.setText("");
+        tfPassword.setText("");
+        tfFullname.setText("");
+        tfAddress.setText("");
+        tfPhoneNumber.setText("");
     }
 }

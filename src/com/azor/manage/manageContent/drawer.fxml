@@ -32,7 +32,7 @@
                 <JFXTextField fx:id="tfPassword" GridPane.columnIndex="3" />
                 <JFXTextField fx:id="tfPhoneNumber" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <JFXButton fx:id="btnConfirm" onAction="#addData" text="Confirm" GridPane.columnIndex="4" />
-                <JFXButton fx:id="btnReset" text="Reset" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <JFXButton fx:id="btnReset" onAction="#resetTextField" text="Reset" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             </children>
         </GridPane>
         <GridPane prefHeight="90.0" prefWidth="1105.0">
