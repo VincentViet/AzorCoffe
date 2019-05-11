@@ -5,4 +5,6 @@
 
 **Author**:
 * Nguyen Sang Viet - 16521433
-* 
+
+**Contributor**:
+* Nguyen Xuan An - 16520015
