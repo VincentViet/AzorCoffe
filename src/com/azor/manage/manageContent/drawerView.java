@@ -1,5 +1,6 @@
 package com.azor.manage.manageContent;
 
+import com.azor.AzorCoffee;
 import com.azor.models.Account;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -32,13 +33,15 @@ public class drawerView {
 
     @FXML
     private void addData(){
+        com.azor.manage.View view = AzorCoffee.fxmlMap.get("manage").getController();
         String username = tfUsername.getText().toString();
         String email = tfEmail.getText().toString();
         String password = tfPassword.getText().toString();
         String fullname = tfFullname.getText().toString();
         String address = tfAddress.getText().toString();
         String telphone = tfPhoneNumber.getText().toString();
-        Account temp = new Account(username, email, password, fullname, address, telphone);
+        Account account = new Account(username, email, password, fullname, address, telphone);
+        view.addCurrentData(account);
 
     }
 }

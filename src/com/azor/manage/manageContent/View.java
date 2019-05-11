@@ -138,4 +138,8 @@ public class View implements Initializable {
         final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
     }
+
+    public void addData(Account account){
+        listItem.add(account);
+    }
 }

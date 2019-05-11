@@ -1,5 +1,6 @@
 package com.azor.manage;
 
+import com.azor.models.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,8 @@ public class View implements IView, Initializable {
 
     private FXMLLoader accountFXML;
 
+    private FXMLLoader manageFXML;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         contents = new ArrayList<>();
@@ -34,10 +37,11 @@ public class View implements IView, Initializable {
             Parent titlebar = FXMLLoader.load(getClass().getResource("titlebar/.fxml"));
 
             accountFXML = new FXMLLoader(getClass().getResource("accountContent/.fxml"));
+            manageFXML = new FXMLLoader(getClass().getResource("manageContent/.fxml"));
 
             contents.add(FXMLLoader.load(getClass().getResource("homeContent/.fxml")));
             contents.add(accountFXML.load());
-            contents.add(FXMLLoader.load(getClass().getResource("manageContent/.fxml")));
+            contents.add(manageFXML.load());
             contents.add(FXMLLoader.load(getClass().getResource("chartContent/.fxml")));
 
             borderPane.setTop(titlebar);
@@ -56,5 +60,10 @@ public class View implements IView, Initializable {
     public void loadCurrentAuthInformation(){
         com.azor.manage.accountContent.View view = accountFXML.getController();
         view.loadAuthInformation();
+    }
+
+    public void addCurrentData(Account account){
+        com.azor.manage.manageContent.View view = manageFXML.getController();
+        view.addData(account);
     }
 }
