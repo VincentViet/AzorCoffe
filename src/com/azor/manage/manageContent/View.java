@@ -4,6 +4,7 @@ import com.azor.models.Account;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,10 +36,13 @@ public class View implements Initializable {
     @FXML
     private JFXDrawer drawerAdd;
 
+    @FXML
+    private JFXTextField tfSearchBar;
+
     Presenter presenter = new Presenter();
 
     @FXML
-    private void toggleDrawer(){
+    private void toggleDrawer() {
         drawerAdd.toggle();
     }
 
@@ -122,24 +126,38 @@ public class View implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        tfSearchBar.textProperty().addListener(setupSearchField(treeTableView));
     }
 
 
     @FXML
     private void deleteRow() {
-        Account currentSelected= treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
+        Account currentSelected = treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
         presenter.deleteRowInDatabase(currentSelected);
         deleteRowInTreeTableView(currentSelected);
 
     }
 
-    private void deleteRowInTreeTableView(Account account){
+    private void deleteRowInTreeTableView(Account account) {
         listItem.remove(account);
         final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
     }
 
-    public void addData(Account account){
+    public void addData(Account account) {
         listItem.add(account);
+    }
+
+    private ChangeListener<String> setupSearchField(final JFXTreeTableView<Account> treeTableView) {
+        return (o, oldVal, newVal) ->
+                treeTableView.setPredicate(personProp -> {
+                    final Account account = personProp.getValue();
+                    return account.getUsername().contains(newVal)
+                            || account.getFullname().contains(newVal)
+                            || account.getEmail().contains(newVal)
+                            || account.getTelphone().contains(newVal)
+                            || account.getAddress().contains(newVal);
+                });
     }
 }

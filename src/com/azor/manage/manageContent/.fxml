@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,7 +23,11 @@
          </children></HBox>
       <HBox alignment="CENTER_LEFT" layoutY="100.0" prefHeight="50.0" prefWidth="1105.0">
          <children>
-            <VBox prefHeight="50.0" prefWidth="905.0" />
+            <AnchorPane prefHeight="50.0" prefWidth="905.0">
+               <children>
+                  <JFXTextField fx:id="tfSearchBar" layoutX="261.0" layoutY="13.0" prefWidth="300.0" AnchorPane.leftAnchor="261.0" AnchorPane.topAnchor="13.0" />
+               </children>
+            </AnchorPane>
             <VBox prefHeight="50.0" prefWidth="100.0">
                <children>
                   <JFXButton fx:id="deleteButton" onAction="#deleteRow" text="Delete" />
