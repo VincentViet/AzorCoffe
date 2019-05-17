@@ -62,8 +62,10 @@ public class View implements IView, Initializable {
         view.loadAuthInformation();
     }
 
+
+    // Hàm trung gian gọi từ View tổng để có thể truyền data từ drawer của manageContent sang table của manageContent: chức năng add dữ liệu vào table
     public void addCurrentData(Account account){
         com.azor.manage.manageContent.View view = manageFXML.getController();
-        view.addData(account);
+        view.addDataToTable(account);
     }
 }

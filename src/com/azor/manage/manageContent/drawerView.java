@@ -31,6 +31,8 @@ public class drawerView {
     @FXML
     private JFXTextField tfAddress;
 
+    Presenter presenter;
+
     @FXML
     private void addData(){
         com.azor.manage.View view = AzorCoffee.fxmlMap.get("manage").getController();
@@ -42,6 +44,8 @@ public class drawerView {
         String telphone = tfPhoneNumber.getText().toString();
         Account account = new Account(username, email, password, fullname, address, telphone);
         view.addCurrentData(account);
+        presenter = new Presenter();
+        presenter.addToDatabase(account);
     }
 
     @FXML

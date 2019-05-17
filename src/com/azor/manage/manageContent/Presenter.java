@@ -28,10 +28,26 @@ public class Presenter {
         return accounts;
     }
 
-//    public void addToDatabase(Account account){
-//        String query
-//
-//    }
+    public void addToDatabase(Account account){
+        String query = "Insert into account(username, email, password, fullname, address, telphone, type) " +
+                "values(?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement temp = null;
+        try{
+            temp = Database.getInstance().getConnection().prepareStatement(query);
+            temp.setString(1,account.getUsername());
+            temp.setString(2, account.getEmail());
+            temp.setString(3, account.getPassword());
+            temp.setString(4, account.getFullname());
+            temp.setString(5, account.getAddress());
+            temp.setString(6, account.getTelphone());
+            temp.setInt(7, account.getType());
+            temp.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
 
     public void deleteRowInDatabase(Account account){
         String query = "Delete from account where username = ?";

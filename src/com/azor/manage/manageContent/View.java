@@ -145,7 +145,9 @@ public class View implements Initializable {
         currCountProp.set(currCountProp.get() - 1);
     }
 
-    public void addData(Account account) {
+
+
+    public void addDataToTable(Account account) {
         listItem.add(account);
     }
 
