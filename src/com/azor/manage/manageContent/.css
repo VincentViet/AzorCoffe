@@ -1,0 +1,51 @@
+.drawer{
+}
+
+.add-btn{
+    -fx-background-color: #0275d8;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.delete-btn{
+    -fx-background-color: #d50000;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.secondary-btn{
+    -fx-text-fill: #6747cd;
+}
+
+/*Style of entire tableView*/
+  .table-view{
+      -fx-background-color: rgba(103, 71, 205, 0.51);
+
+  }
+
+
+/*Style of each column header in the tableView*/
+  .table-view .column-header {
+      -fx-background-color: #6747cd;
+      -fx-font-size: 14px;
+  }
+
+/*Style of each column header's background in the tableView*/
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
+}
+
+/*Style of each column header's label  in the tableView*/
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+/*Style of each column in the tableView*/
+  .table-view .table-column{
+      -fx-alignment:center;
+      -fx-font-size: 14px;
+  }
+
+
+

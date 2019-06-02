@@ -3,6 +3,7 @@ package com.azor.manage.manageContent;
 import com.azor.models.Account;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.effects.JFXDepthManager;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -126,6 +127,9 @@ public class View implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        JFXDepthManager depthManager = new JFXDepthManager();
+        depthManager.setDepth(drawerAdd, 4);
 
         tfSearchBar.textProperty().addListener(setupSearchField(treeTableView));
     }
