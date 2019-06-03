@@ -1,6 +1,7 @@
 package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
+import com.azor.models.Drink;
 import com.azor.utils.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Presenter {
-    public ObservableList<Account> initItem(){
+    public ObservableList<Account> loadAccount(){
         ResultSet result = null;
         String query = "Select * from account where type = 1";
         PreparedStatement statement = null;
@@ -26,6 +27,35 @@ public class Presenter {
             e.printStackTrace();
         }
         return accounts;
+    }
+
+    public ObservableList<Drink> loadDrink(){
+        ResultSet result = null;
+        String query = "Select name, price, categoryID from main.FoodAndDrink";
+        PreparedStatement statement = null;
+        ObservableList<Drink> drinks=  FXCollections.observableArrayList();
+        try {
+            statement = Database.getInstance().getConnection().prepareStatement(query);
+            result= statement.executeQuery();
+            while (result.next()){
+                Drink drink= new Drink(result);
+                ResultSet tempResult = null;
+                String tempQuery = "Select name from Categories where id = ?";
+                PreparedStatement tempStatement = null;
+                try{
+                    tempStatement = Database.getInstance().getConnection().prepareStatement(tempQuery);
+                    tempStatement.setString(1, drink.getCategoryID());
+                    tempResult = tempStatement.executeQuery();
+                    drink.setCategoryName(tempResult.getString(1));
+                } catch (SQLException e){
+                    e.printStackTrace();
+                }
+                drinks.add(drink);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return drinks;
     }
 
     public void addToDatabase(Account account){

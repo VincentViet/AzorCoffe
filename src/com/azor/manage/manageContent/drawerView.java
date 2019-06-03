@@ -43,10 +43,13 @@ public class drawerView {
         String fullname = tfFullname.getText().toString();
         String address = tfAddress.getText().toString();
         String telphone = tfPhoneNumber.getText().toString();
-        Account account = new Account(username, email, password, fullname, address, telphone);
-        view.addCurrentData(account);
-        presenter = new Presenter();
-        presenter.addToDatabase(account);
+        if ((username.length()!=0) && (email.length()!=0) && (password.length() !=0) && (fullname.length()!=0) && (address.length()!=0) && (telphone.length()!=0))
+        {
+            Account account = new Account(username, email, password, fullname, address, telphone);
+            view.addCurrentData(account);
+            presenter = new Presenter();
+            presenter.addToDatabase(account);
+        }
     }
 
     @FXML

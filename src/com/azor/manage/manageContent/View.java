@@ -1,6 +1,7 @@
 package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
+import com.azor.models.Drink;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.effects.JFXDepthManager;
@@ -23,10 +24,14 @@ import java.util.ResourceBundle;
 
 public class View implements Initializable {
 
-    ObservableList<Account> listItem;
+    ObservableList<Account> listAccount;
+    ObservableList<Drink> listDrink;
 
     @FXML
-    private JFXTreeTableView<Account> treeTableView;
+    private JFXTreeTableView<Account> treeviewAccount;
+
+    @FXML
+    private JFXTreeTableView<Drink> treeviewDrink;
 
     @FXML
     private JFXButton deleteButton;
@@ -50,6 +55,24 @@ public class View implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        initAccountTable();
+        initDrinkTable();
+
+        // Load UI drawer.fxml to drawerAdd
+        try {
+            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawer.fxml"));
+            drawerAdd.setSidePane(drawerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JFXDepthManager depthManager = new JFXDepthManager();
+        depthManager.setDepth(drawerAdd, 4);
+
+        tfSearchBar.textProperty().addListener(setupSearchField(treeviewAccount));
+    }
+
+    void initAccountTable(){
         // Initialize tree table view collumns
         JFXTreeTableColumn<Account, String> username = new JFXTreeTableColumn<>("Username");
         username.setPrefWidth(150);
@@ -111,50 +134,87 @@ public class View implements Initializable {
         });
         telphone.setStyle("-fx-alignment: center");
 
-        // Initialize tree table view items
-        listItem = presenter.initItem();
+        // load data from database
+        listAccount = presenter.loadAccount();
 
         // Create tree
-        final TreeItem<Account> root = new RecursiveTreeItem<Account>(listItem, RecursiveTreeObject::getChildren);
-        treeTableView.getColumns().setAll(username, password, email, fullname, address, telphone);
-        treeTableView.setRoot(root);
-        treeTableView.setShowRoot(false);
+        final TreeItem<Account> root = new RecursiveTreeItem<Account>(listAccount, RecursiveTreeObject::getChildren);
+        treeviewAccount.getColumns().setAll(username, password, email, fullname, address, telphone);
+        treeviewAccount.setRoot(root);
+        treeviewAccount.setShowRoot(false);
+    }
 
-        // Load UI drawer.fxml to drawerAdd
-        try {
-            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawer.fxml"));
-            drawerAdd.setSidePane(drawerContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void initDrinkTable(){
+        JFXTreeTableColumn<Drink, String> drinkName = new JFXTreeTableColumn<>("Name");
+        drinkName.setPrefWidth(275);
+        drinkName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
+                return param.getValue().getValue().nameProperty();
+            }
+        });
+        drinkName.setStyle("-fx-alignment: center");
 
-        JFXDepthManager depthManager = new JFXDepthManager();
-        depthManager.setDepth(drawerAdd, 4);
+        JFXTreeTableColumn<Drink, String> drinkPrice = new JFXTreeTableColumn<>("Price");
+        drinkPrice.setPrefWidth(275);
+        drinkPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
+                return param.getValue().getValue().priceProperty();
+            }
+        });
+        drinkPrice.setStyle("-fx-alignment: center");
 
-        tfSearchBar.textProperty().addListener(setupSearchField(treeTableView));
+        JFXTreeTableColumn<Drink, String> categoryID = new JFXTreeTableColumn<>("Category ID");
+        categoryID.setPrefWidth(275);
+        categoryID.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
+                return param.getValue().getValue().categoryIDProperty();
+            }
+        });
+        categoryID.setStyle("-fx-alignment: center");
+
+        JFXTreeTableColumn<Drink, String> categoryName = new JFXTreeTableColumn<>("Category Name");
+        categoryName.setPrefWidth(278);
+        categoryName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
+                return param.getValue().getValue().categoryNameProperty();
+            }
+        });
+        categoryName.setStyle("-fx-alignment: center");
+
+        listDrink = presenter.loadDrink();
+
+        final TreeItem<Drink> root = new RecursiveTreeItem<Drink>(listDrink, RecursiveTreeObject::getChildren);
+        treeviewDrink.getColumns().setAll(drinkName, drinkPrice, categoryID,categoryName);
+        treeviewDrink.setRoot(root);
+        treeviewDrink.setShowRoot(false);
     }
 
 
     @FXML
     private void deleteRow() {
-        Account currentSelected = treeTableView.getSelectionModel().selectedItemProperty().get().getValue();
+        Account currentSelected = treeviewAccount.getSelectionModel().selectedItemProperty().get().getValue();
         presenter.deleteRowInDatabase(currentSelected);
         deleteRowInTreeTableView(currentSelected);
 
     }
 
     private void deleteRowInTreeTableView(Account account) {
-        listItem.remove(account);
-        final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
+        listAccount.remove(account);
+        final IntegerProperty currCountProp = treeviewAccount.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
     }
 
 
 
     public void addDataToTable(Account account) {
-        listItem.add(account);
+        listAccount.add(account);
     }
 
+    // Search bar logic
     private ChangeListener<String> setupSearchField(final JFXTreeTableView<Account> treeTableView) {
         return (o, oldVal, newVal) ->
                 treeTableView.setPredicate(personProp -> {
