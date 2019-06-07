@@ -5,15 +5,18 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1105.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manage.manageContent.View">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1105.0" style="-fx-tab-min-width: 200;" styleClass="tab" stylesheets="@.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manage.manageContent.View">
     <tabs>
         <Tab text="Account">
             <content>
@@ -21,15 +24,22 @@
                     <children>
                           <AnchorPane layoutY="121.0" prefHeight="625.0" prefWidth="1105.0">
                               <children>
-                                  <JFXTreeTableView fx:id="treeviewAccount" prefHeight="625.0" prefWidth="1105.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                  <JFXDrawer fx:id="drawerAdd" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                  <JFXTreeTableView fx:id="treeviewAccount" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#deleteRowAccount" text="Delete" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></JFXTreeTableView>
+                                  <JFXDrawer fx:id="drawerAddAccount" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               </children>
                           </AnchorPane>
                           <HBox alignment="CENTER_LEFT" layoutY="66.0" prefHeight="55.0" prefWidth="1105.0">
                               <children>
-                                  <AnchorPane prefHeight="50.0" prefWidth="955.0">
+                                  <AnchorPane prefHeight="50.0" prefWidth="934.0">
                                       <children>
-                                          <JFXTextField fx:id="tfSearchBar" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="500.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
+                                          <JFXTextField fx:id="tfSearchBarAccount" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="450.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
                                               <font>
                                                   <Font size="14.0" />
                                               </font>
@@ -38,7 +48,7 @@
                                   </AnchorPane>
                                   <VBox prefHeight="50.0" prefWidth="60.0">
                                       <children>
-                                          <JFXButton fx:id="deleteButton" onAction="#deleteRow" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
+                                          <JFXButton fx:id="deleteButton" onAction="#deleteRowAccount" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
                                               <HBox.margin>
                                                   <Insets right="50.0" />
                                               </HBox.margin>
@@ -47,7 +57,7 @@
                                   </VBox>
                                   <VBox prefHeight="50.0" prefWidth="60.0">
                                       <children>
-                                          <JFXButton fx:id="addButton" onAction="#toggleDrawer" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
+                                          <JFXButton fx:id="addButton" onAction="#toggleDrawerAccount" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
                                               <HBox.margin>
                                                   <Insets right="50.0" />
                                               </HBox.margin>
@@ -77,15 +87,15 @@
                <children>
                   <AnchorPane layoutY="121.0" prefHeight="625.0" prefWidth="1105.0">
                      <children>
-                        <JFXTreeTableView fx:id="treeviewDrink" prefHeight="625.0" prefWidth="1105.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <JFXDrawer fx:id="drawerAdd1" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <JFXTreeTableView fx:id="treeviewDrink" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
+                        <JFXDrawer fx:id="drawerAddFood" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <HBox alignment="CENTER_LEFT" layoutY="66.0" prefHeight="55.0" prefWidth="1105.0">
                      <children>
-                        <AnchorPane prefHeight="50.0" prefWidth="955.0">
+                        <AnchorPane prefHeight="50.0" prefWidth="934.0">
                            <children>
-                              <JFXTextField fx:id="tfSearchBar1" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="500.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
+                              <JFXTextField fx:id="tfSearchBarDrink" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="450.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -94,7 +104,7 @@
                         </AnchorPane>
                         <VBox prefHeight="50.0" prefWidth="60.0">
                            <children>
-                              <JFXButton prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
+                              <JFXButton onAction="#deleteRowDrink" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
                                  <HBox.margin>
                                     <Insets right="50.0" />
                                  </HBox.margin>
@@ -103,7 +113,7 @@
                         </VBox>
                         <VBox prefHeight="55.0" prefWidth="60.0">
                            <children>
-                              <JFXButton prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
+                              <JFXButton onAction="#toggleDrawerFood" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
                                  <HBox.margin>
                                     <Insets right="50.0" />
                                  </HBox.margin>
@@ -128,5 +138,40 @@
             </AnchorPane>
          </content>
         </Tab>
+      <Tab text="Bill history">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <AnchorPane prefHeight="746.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXTreeTableView fx:id="treeviewBill" layoutY="346.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0" />
+                        <Label layoutX="32.0" layoutY="30.0" text="Bill History" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="18.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tfSearchBarBill" focusColor="#6747cd" layoutX="50.0" layoutY="70.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </AnchorPane>
+               </center>
+               <right>
+                  <AnchorPane prefHeight="200.0" prefWidth="605.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXTreeTableView fx:id="treeviewBillInfo" layoutY="346.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0" />
+                        <JFXButton disable="true" layoutX="505.0" layoutY="80.0" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #6747cd; -fx-background-radius: 0;" stylesheets="@.css" text="Bill Detail" textFill="WHITE" AnchorPane.bottomAnchor="626.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </right>
+            </BorderPane>
+         </content>
+      </Tab>
     </tabs>
 </TabPane>

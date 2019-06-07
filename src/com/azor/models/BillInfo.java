@@ -15,7 +15,6 @@ public class BillInfo extends RecursiveTreeObject<BillInfo> {
 
     public BillInfo(ResultSet set){
         try {
-            id = set.getInt("id");
             name = new SimpleStringProperty("\t" + set.getString("name"));
             price = new SimpleStringProperty("" + set.getFloat("price"));
             count = new SimpleStringProperty("" + set.getInt("count"));

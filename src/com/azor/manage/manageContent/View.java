@@ -1,17 +1,22 @@
 package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
+import com.azor.models.Bill;
+import com.azor.models.BillInfo;
 import com.azor.models.Drink;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.effects.JFXDepthManager;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.VBox;
@@ -20,12 +25,14 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class View implements Initializable {
 
     ObservableList<Account> listAccount;
     ObservableList<Drink> listDrink;
+    ObservableList<Bill> listBill;
+    ObservableList<BillInfo> listBillInfo;
 
     @FXML
     private JFXTreeTableView<Account> treeviewAccount;
@@ -34,22 +41,48 @@ public class View implements Initializable {
     private JFXTreeTableView<Drink> treeviewDrink;
 
     @FXML
-    private JFXButton deleteButton;
+    private JFXTreeTableView<Bill> treeviewBill;
 
     @FXML
-    private JFXButton addButton;
+    private JFXTreeTableView<BillInfo> treeviewBillInfo;
 
     @FXML
-    private JFXDrawer drawerAdd;
+    private JFXDrawer drawerAddAccount;
 
     @FXML
-    private JFXTextField tfSearchBar;
+    private JFXDrawer drawerAddFood;
+
+    @FXML
+    private JFXTextField tfSearchBarAccount;
+
+    @FXML
+    private JFXTextField tfSearchBarDrink;
+
+    @FXML
+    private JFXTextField tfSearchBarBill;
 
     Presenter presenter = new Presenter();
 
     @FXML
-    private void toggleDrawer() {
-        drawerAdd.toggle();
+    private void toggleDrawerAccount() {
+        try {
+            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawerAccount.fxml"));
+            drawerAddAccount.setSidePane(drawerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        drawerAddAccount.toggle();
+    }
+
+    @FXML
+    private void toggleDrawerFood() {
+        try {
+            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawerFood.fxml"));
+            drawerAddFood.setSidePane(drawerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        drawerAddFood.toggle();
     }
 
     @Override
@@ -57,25 +90,22 @@ public class View implements Initializable {
 
         initAccountTable();
         initDrinkTable();
-
-        // Load UI drawer.fxml to drawerAdd
-        try {
-            VBox drawerContent = FXMLLoader.load(getClass().getResource("drawer.fxml"));
-            drawerAdd.setSidePane(drawerContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        initBillTable();
+        initBillInfoTable();
 
         JFXDepthManager depthManager = new JFXDepthManager();
-        depthManager.setDepth(drawerAdd, 4);
+        depthManager.setDepth(drawerAddAccount, 4);
+        depthManager.setDepth(drawerAddFood, 4);
 
-        tfSearchBar.textProperty().addListener(setupSearchField(treeviewAccount));
+        tfSearchBarAccount.textProperty().addListener(setupSearchFieldAccount(treeviewAccount));
+        tfSearchBarDrink.textProperty().addListener(setupSearchFieldDrink(treeviewDrink));
+        tfSearchBarBill.textProperty().addListener(setupSearchFieldBill(treeviewBill));
     }
 
-    void initAccountTable(){
+    void initAccountTable() {
         // Initialize tree table view collumns
         JFXTreeTableColumn<Account, String> username = new JFXTreeTableColumn<>("Username");
-        username.setPrefWidth(150);
+        username.setPrefWidth(125);
         username.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -85,7 +115,7 @@ public class View implements Initializable {
         username.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> password = new JFXTreeTableColumn<>("Password");
-        password.setPrefWidth(150);
+        password.setPrefWidth(125);
         password.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -95,7 +125,7 @@ public class View implements Initializable {
         password.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> email = new JFXTreeTableColumn<>("Email");
-        email.setPrefWidth(250);
+        email.setPrefWidth(225);
         email.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -115,7 +145,7 @@ public class View implements Initializable {
         fullname.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> address = new JFXTreeTableColumn<>("Address");
-        address.setPrefWidth(253);
+        address.setPrefWidth(205);
         address.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -125,7 +155,7 @@ public class View implements Initializable {
         address.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Account, String> telphone = new JFXTreeTableColumn<>("Telephone Number");
-        telphone.setPrefWidth(150);
+        telphone.setPrefWidth(175);
         telphone.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Account, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Account, String> param) {
@@ -137,6 +167,9 @@ public class View implements Initializable {
         // load data from database
         listAccount = presenter.loadAccount();
 
+        // allow multiple select
+        treeviewAccount.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         // Create tree
         final TreeItem<Account> root = new RecursiveTreeItem<Account>(listAccount, RecursiveTreeObject::getChildren);
         treeviewAccount.getColumns().setAll(username, password, email, fullname, address, telphone);
@@ -144,9 +177,9 @@ public class View implements Initializable {
         treeviewAccount.setShowRoot(false);
     }
 
-    void initDrinkTable(){
+    void initDrinkTable() {
         JFXTreeTableColumn<Drink, String> drinkName = new JFXTreeTableColumn<>("Name");
-        drinkName.setPrefWidth(275);
+        drinkName.setPrefWidth(325);
         drinkName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
@@ -156,7 +189,7 @@ public class View implements Initializable {
         drinkName.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Drink, String> drinkPrice = new JFXTreeTableColumn<>("Price");
-        drinkPrice.setPrefWidth(275);
+        drinkPrice.setPrefWidth(180);
         drinkPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
@@ -166,7 +199,7 @@ public class View implements Initializable {
         drinkPrice.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Drink, String> categoryID = new JFXTreeTableColumn<>("Category ID");
-        categoryID.setPrefWidth(275);
+        categoryID.setPrefWidth(175);
         categoryID.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
@@ -176,7 +209,7 @@ public class View implements Initializable {
         categoryID.setStyle("-fx-alignment: center");
 
         JFXTreeTableColumn<Drink, String> categoryName = new JFXTreeTableColumn<>("Category Name");
-        categoryName.setPrefWidth(278);
+        categoryName.setPrefWidth(325);
         categoryName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Drink, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Drink, String> param) {
@@ -187,27 +220,117 @@ public class View implements Initializable {
 
         listDrink = presenter.loadDrink();
 
+        // allow multiple select
+        treeviewAccount.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         final TreeItem<Drink> root = new RecursiveTreeItem<Drink>(listDrink, RecursiveTreeObject::getChildren);
-        treeviewDrink.getColumns().setAll(drinkName, drinkPrice, categoryID,categoryName);
+        treeviewDrink.getColumns().setAll(drinkName, drinkPrice, categoryID, categoryName);
         treeviewDrink.setRoot(root);
         treeviewDrink.setShowRoot(false);
     }
 
+    void initBillTable() {
+        JFXTreeTableColumn<Bill, String> billID = new JFXTreeTableColumn<>("ID");
+        billID.setPrefWidth(125);
+        billID.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Bill, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Bill, String> param) {
+                return param.getValue().getValue().IDProperty();
+            }
+        });
+        billID.setStyle("-fx-alignment: center");
+
+        JFXTreeTableColumn<Bill, String> billDate = new JFXTreeTableColumn<>("Date");
+        billDate.setPrefWidth(275);
+        billDate.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Bill, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Bill, String> param) {
+                return param.getValue().getValue().dateProperty();
+            }
+        });
+        billDate.setStyle("-fx-alignment: center");
+
+        // load data from database
+        listBill = presenter.loadBill();
+
+        // allow multiple select
+        treeviewBill.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // Create tree
+        final TreeItem<Bill> root = new RecursiveTreeItem<Bill>(listBill, RecursiveTreeObject::getChildren);
+        treeviewBill.getColumns().setAll(billID, billDate);
+        treeviewBill.setRoot(root);
+        treeviewBill.setShowRoot(false);
+
+        treeviewBill.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            listBillInfo= presenter.loadBillInfo(treeviewBill.getSelectionModel().getSelectedItem().getValue());
+            final TreeItem<BillInfo> rootBillInfo = new RecursiveTreeItem<BillInfo>(listBillInfo, RecursiveTreeObject::getChildren);
+            treeviewBillInfo.setRoot(rootBillInfo);
+        });
+    }
+
+    void initBillInfoTable() {
+        JFXTreeTableColumn<BillInfo, String> billInfoName = new JFXTreeTableColumn<>("Name");
+        billInfoName.setPrefWidth(305);
+        billInfoName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BillInfo, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BillInfo, String> param) {
+                return param.getValue().getValue().nameProperty();
+            }
+        });
+        billInfoName.setStyle("-fx-alignment: center");
+
+        JFXTreeTableColumn<BillInfo, String> billInfoPrice = new JFXTreeTableColumn<>("Price");
+        billInfoPrice.setPrefWidth(125);
+        billInfoPrice.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BillInfo, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BillInfo, String> param) {
+                return param.getValue().getValue().priceProperty();
+            }
+        });
+        billInfoPrice.setStyle("-fx-alignment: center");
+
+        JFXTreeTableColumn<BillInfo, String> billInfoCount = new JFXTreeTableColumn<>("Count");
+        billInfoCount.setPrefWidth(125);
+        billInfoCount.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BillInfo, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BillInfo, String> param) {
+                return param.getValue().getValue().countProperty();
+            }
+        });
+        billInfoName.setStyle("-fx-alignment: center");
+
+        // load data from database
+        // allow multiple select
+
+        // Create tree
+
+        treeviewBillInfo.getColumns().setAll(billInfoName, billInfoPrice, billInfoCount);
+
+        treeviewBillInfo.setShowRoot(false);
+
+    }
+
 
     @FXML
-    private void deleteRow() {
+    private void deleteRowAccount() {
         Account currentSelected = treeviewAccount.getSelectionModel().selectedItemProperty().get().getValue();
-        presenter.deleteRowInDatabase(currentSelected);
-        deleteRowInTreeTableView(currentSelected);
-
-    }
-
-    private void deleteRowInTreeTableView(Account account) {
-        listAccount.remove(account);
+        presenter.deleteAccountInDatabase(currentSelected);
+        listAccount.remove(currentSelected);
         final IntegerProperty currCountProp = treeviewAccount.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
+
     }
 
+    @FXML
+    private void deleteRowDrink(){
+        Drink currentSelected = treeviewDrink.getSelectionModel().selectedItemProperty().get().getValue();
+        presenter.deleteDrinkInDatabase(currentSelected);
+        listAccount.remove(currentSelected);
+        final IntegerProperty currCountProp = treeviewDrink.currentItemsCountProperty();
+        currCountProp.set(currCountProp.get() - 1);
+
+    }
 
 
     public void addDataToTable(Account account) {
@@ -215,7 +338,7 @@ public class View implements Initializable {
     }
 
     // Search bar logic
-    private ChangeListener<String> setupSearchField(final JFXTreeTableView<Account> treeTableView) {
+    private ChangeListener<String> setupSearchFieldAccount(final JFXTreeTableView<Account> treeTableView) {
         return (o, oldVal, newVal) ->
                 treeTableView.setPredicate(personProp -> {
                     final Account account = personProp.getValue();
@@ -224,6 +347,25 @@ public class View implements Initializable {
                             || account.getEmail().contains(newVal)
                             || account.getTelphone().contains(newVal)
                             || account.getAddress().contains(newVal);
+                });
+    }
+
+    // Search bar logic
+    private ChangeListener<String> setupSearchFieldDrink(final JFXTreeTableView<Drink> treeTableView) {
+        return (o, oldVal, newVal) ->
+                treeTableView.setPredicate(personProp -> {
+                    final Drink drink = personProp.getValue();
+                    return drink.getName().contains(newVal)
+                            || drink.getCategoryName().contains(newVal);
+                });
+    }
+
+    // Search bar logic
+    private ChangeListener<String> setupSearchFieldBill(final JFXTreeTableView<Bill> treeTableView) {
+        return (o, oldVal, newVal) ->
+                treeTableView.setPredicate(personProp -> {
+                    final Bill bill = personProp.getValue();
+                    return bill.getDate().contains(newVal);
                 });
     }
 }

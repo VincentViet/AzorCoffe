@@ -1,6 +1,8 @@
 package com.azor.manage.manageContent;
 
 import com.azor.models.Account;
+import com.azor.models.Bill;
+import com.azor.models.BillInfo;
 import com.azor.models.Drink;
 import com.azor.utils.Database;
 import javafx.collections.FXCollections;
@@ -58,6 +60,43 @@ public class Presenter {
         return drinks;
     }
 
+    public ObservableList<Bill> loadBill(){
+        ResultSet result = null;
+        String query = "Select id, creationTime from bill";
+        PreparedStatement statement = null;
+        ObservableList<Bill> bills=  FXCollections.observableArrayList();
+        try {
+            statement = Database.getInstance().getConnection().prepareStatement(query);
+            result= statement.executeQuery();
+            while (result.next()){
+                Bill bill= new Bill(result);
+                bills.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
+    public ObservableList<BillInfo> loadBillInfo(Bill selectedBill){
+        ResultSet result = null;
+        String query = "Select name, price, count from BillInfo where billID = ?";
+        PreparedStatement statement = null;
+        ObservableList<BillInfo> bills=  FXCollections.observableArrayList();
+        try {
+            statement = Database.getInstance().getConnection().prepareStatement(query);
+            statement.setString(1,selectedBill.getID());
+            result= statement.executeQuery();
+            while (result.next()){
+                BillInfo bill= new BillInfo(result);
+                bills.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
+
     public void addToDatabase(Account account){
         String query = "Insert into account(username, email, password, fullname, address, telphone, type) " +
                 "values(?, ?, ?, ?, ?, ?, ?)";
@@ -79,7 +118,7 @@ public class Presenter {
 
     }
 
-    public void deleteRowInDatabase(Account account){
+    public void deleteAccountInDatabase(Account account){
         String query = "Delete from account where username = ?";
         PreparedStatement temp = null;
         try {
@@ -91,7 +130,16 @@ public class Presenter {
         }
     }
 
-    public void deleteRowInTable(Account account){
-
+    public void deleteDrinkInDatabase(Drink drink){
+        String query = "Delete from drink where name = ?";
+        PreparedStatement temp = null;
+        try {
+            temp = Database.getInstance().getConnection().prepareStatement(query);
+            temp.setString(1,drink.getName());
+            temp.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 }
