@@ -26,6 +26,11 @@ public class Drink extends RecursiveTreeObject<Drink> {
         }
     }
 
+    public Drink(String name, String price) {
+        this.name = new SimpleStringProperty(name);
+        this.price = new SimpleStringProperty(price);
+    }
+
     public String getCategoryName() {
         return categoryName.get();
     }

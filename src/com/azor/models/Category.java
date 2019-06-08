@@ -1,9 +1,13 @@
 package com.azor.models;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Category {
+public class Category extends RecursiveTreeObject<Category> {
     private int id;
     private String name;
 
@@ -16,16 +20,24 @@ public class Category {
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString()  {
+        return this.name;
     }
 }

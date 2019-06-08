@@ -2,201 +2,62 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="200.0" prefWidth="1105.0" style="-fx-background-color: #fafafa;" styleClass="drawer" stylesheets="@.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manage.manageContent.drawerView">
+<VBox prefHeight="200.0" prefWidth="1105.0" style="-fx-background-color: #fafafa;" styleClass="drawer" stylesheets="@.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.azor.manage.manageContent.drawerAccountController">
     <children>
-        <GridPane prefHeight="100.0" prefWidth="1105.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="150.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="325.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="150.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" percentWidth="0.0" prefWidth="330.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" percentWidth="0.0" prefWidth="150.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                      <Label text="Username :">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin></Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                      <JFXTextField fx:id="tfUsername" prefWidth="300.0">
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font></JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="174.0" GridPane.columnIndex="2">
-               <children>
-                      <Label text="Password :">
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font></Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3">
-               <children>
-                      <JFXTextField fx:id="tfPassword" alignment="TOP_LEFT" prefWidth="300.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4">
-               <children>
-                      <JFXButton fx:id="btnConfirm" onAction="#addData" text="Confirm" textFill="#6747cd">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                      <Label text="Full name :">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin></Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                      <JFXTextField fx:id="tfFullname" prefWidth="300.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin></JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
-                      <Label text="Phone   :">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin></Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <children>
-                      <JFXTextField fx:id="tfPhoneNumber" alignment="TOP_LEFT" prefWidth="300.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </JFXTextField>
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <children>
-                      <JFXButton fx:id="btnReset" onAction="#resetTextField" text="Reset" textFill="#6747cd">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
-            </HBox>
-            </children>
-        </GridPane>
-        <GridPane prefHeight="90.0" prefWidth="1105.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="150.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="955.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                      <Label text="Email     :">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin></Label>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                      <Label text="Address  :">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" top="20.0" />
-                     </HBox.margin></Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                      <JFXTextField fx:id="tfEmail" prefWidth="455.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin></JFXTextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                      <JFXTextField fx:id="tfAddress" prefWidth="455.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin></JFXTextField>
-               </children>
-            </HBox>
-            </children>
-        </GridPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+                <JFXTextField fx:id="tfAddress" labelFloat="true" layoutX="415.0" layoutY="156.0" prefWidth="400.0" promptText="Address" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="145.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXButton fx:id="btnReset" layoutX="986.0" layoutY="81.0" onAction="#resetTextField" prefWidth="88.0" text="Reset" textFill="#6747cd" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="65.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+                <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="415.0" layoutY="115.0" prefWidth="400.0" promptText="Email" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="80.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXTextField fx:id="tfPhoneNumber" alignment="TOP_LEFT" labelFloat="true" layoutX="647.0" layoutY="25.0" prefWidth="250.0" promptText="Phone number" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXTextField fx:id="tfUsername" disable="true" editable="false" labelFloat="true" layoutX="48.0" layoutY="25.0" prefWidth="250.0" promptText="Employee ID" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXTextField fx:id="tfPassword" alignment="TOP_LEFT" disable="true" labelFloat="true" layoutX="48.0" layoutY="85.0" prefWidth="250.0" promptText="Password" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="90.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXTextField fx:id="tfFullname" labelFloat="true" layoutX="403.0" layoutY="25.0" prefWidth="250.0" promptText="Full name" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+                <JFXButton fx:id="btnConfirm" layoutX="953.0" layoutY="81.0" onAction="#addData" text="Confirm" textFill="#6747cd" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Line endX="400.0" endY="180.0" startX="400.0" startY="10.0" AnchorPane.leftAnchor="350.0" />
+            <JFXButton layoutX="148.0" layoutY="133.0" onAction="#generateIDPassword" prefWidth="100.0" text="Generate" textFill="#6747cd" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
     </children>
 </VBox>

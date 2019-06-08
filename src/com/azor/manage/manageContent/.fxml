@@ -41,26 +41,32 @@
                                       <children>
                                           <JFXTextField fx:id="tfSearchBarAccount" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="450.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
                                               <font>
-                                                  <Font size="14.0" />
+                                                  <Font size="16.0" />
                                               </font>
                                           </JFXTextField>
                                       </children>
                                   </AnchorPane>
                                   <VBox prefHeight="50.0" prefWidth="60.0">
                                       <children>
-                                          <JFXButton fx:id="deleteButton" onAction="#deleteRowAccount" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
+                                          <JFXButton fx:id="deleteButton" onAction="#deleteRowAccount" prefHeight="50.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
                                               <HBox.margin>
                                                   <Insets right="50.0" />
                                               </HBox.margin>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                                           </JFXButton>
                                       </children>
                                   </VBox>
                                   <VBox prefHeight="50.0" prefWidth="60.0">
                                       <children>
-                                          <JFXButton fx:id="addButton" onAction="#toggleDrawerAccount" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
+                                          <JFXButton fx:id="addButton" onAction="#toggleDrawerAccount" prefHeight="50.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
                                               <HBox.margin>
                                                   <Insets right="50.0" />
                                               </HBox.margin>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                                           </JFXButton>
                                       </children>
                                   </VBox>
@@ -97,26 +103,32 @@
                            <children>
                               <JFXTextField fx:id="tfSearchBarDrink" focusColor="#6747cd" layoutX="46.0" layoutY="13.0" prefWidth="450.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </JFXTextField>
                            </children>
                         </AnchorPane>
                         <VBox prefHeight="50.0" prefWidth="60.0">
                            <children>
-                              <JFXButton onAction="#deleteRowDrink" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
+                              <JFXButton onAction="#deleteRowDrink" prefHeight="50.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="delete-btn" stylesheets="@.css" text="Delete">
                                  <HBox.margin>
                                     <Insets right="50.0" />
                                  </HBox.margin>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                               </JFXButton>
                            </children>
                         </VBox>
                         <VBox prefHeight="55.0" prefWidth="60.0">
                            <children>
-                              <JFXButton onAction="#toggleDrawerFood" prefHeight="55.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
+                              <JFXButton onAction="#toggleDrawerFood" prefHeight="50.0" prefWidth="60.0" ripplerFill="#0275d8" styleClass="add-btn" stylesheets="@.css" text="Add">
                                  <HBox.margin>
                                     <Insets right="50.0" />
                                  </HBox.margin>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
                               </JFXButton>
                            </children>
                         </VBox>
@@ -150,9 +162,9 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="tfSearchBarBill" focusColor="#6747cd" layoutX="50.0" layoutY="70.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+                        <JFXTextField fx:id="tfSearchBarBill" focusColor="#6747cd" layoutX="50.0" layoutY="70.0" promptText="Find something?" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </JFXTextField>
                      </children>
@@ -162,11 +174,11 @@
                   <AnchorPane prefHeight="200.0" prefWidth="605.0" BorderPane.alignment="CENTER">
                      <children>
                         <JFXTreeTableView fx:id="treeviewBillInfo" layoutY="346.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0" />
-                        <JFXButton disable="true" layoutX="505.0" layoutY="80.0" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #6747cd; -fx-background-radius: 0;" stylesheets="@.css" text="Bill Detail" textFill="WHITE" AnchorPane.bottomAnchor="626.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+                        <Label layoutX="484.0" layoutY="95.0" text="Bill detail" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="90.0">
                            <font>
-                              <Font name="System Bold" size="14.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
-                        </JFXButton>
+                        </Label>
                      </children>
                   </AnchorPane>
                </right>
