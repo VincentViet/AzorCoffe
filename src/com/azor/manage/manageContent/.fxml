@@ -24,7 +24,7 @@
                     <children>
                           <AnchorPane layoutY="121.0" prefHeight="625.0" prefWidth="1105.0">
                               <children>
-                                  <JFXTreeTableView fx:id="treeviewAccount" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                                  <JFXTreeTableView fx:id="treeviewAccount" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                            <contextMenu>
                               <ContextMenu>
                                 <items>
@@ -93,7 +93,14 @@
                <children>
                   <AnchorPane layoutY="121.0" prefHeight="625.0" prefWidth="1105.0">
                      <children>
-                        <JFXTreeTableView fx:id="treeviewDrink" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
+                        <JFXTreeTableView fx:id="treeviewDrink" prefHeight="625.0" styleClass="table-view" stylesheets="@.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#deleteRowDrink" text="Delete" />
+                                 </items>
+                              </ContextMenu>
+                           </contextMenu></JFXTreeTableView>
                         <JFXDrawer fx:id="drawerAddFood" defaultDrawerSize="200.0" direction="BOTTOM" prefHeight="200.0" prefWidth="1105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>

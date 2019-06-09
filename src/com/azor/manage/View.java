@@ -1,6 +1,7 @@
 package com.azor.manage;
 
 import com.azor.models.Account;
+import com.azor.models.Drink;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -63,9 +64,15 @@ public class View implements IView, Initializable {
     }
 
 
-    // Hàm trung gian gọi từ View tổng để có thể truyền data từ drawer của manageContent sang table của manageContent: chức năng add dữ liệu vào table
-    public void addCurrentData(Account account){
+    // Hàm trung gian gọi từ View tổng để có thể truyền data từ drawer Account của manageContent sang table Account của manageContent: chức năng add dữ liệu vào table
+    public void addAccount(Account account){
         com.azor.manage.manageContent.View view = manageFXML.getController();
-        view.addDataToTable(account);
+        view.addAccountToTable(account);
+    }
+
+    // Hàm trung gian gọi từ View tổng để có thể truyền data từ drawer Food của manageContent sang table Food của manageContent: chức năng add dữ liệu vào table
+    public void addDrink(Drink drink){
+        com.azor.manage.manageContent.View view = manageFXML.getController();
+        view.addDrinkToTable(drink);
     }
 }

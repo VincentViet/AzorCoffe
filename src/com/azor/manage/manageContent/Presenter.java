@@ -140,7 +140,7 @@ public class Presenter {
     }
 
     public void deleteDrinkInDatabase(Drink drink) {
-        String query = "Delete from drink where name = ?";
+        String query = "Delete from main.FoodAndDrink where name = ?";
         PreparedStatement temp = null;
         try {
             temp = Database.getInstance().getConnection().prepareStatement(query);
@@ -163,4 +163,14 @@ public class Presenter {
         }
     }
 
+    public void createDrink(Drink drink) throws SQLException{
+        String query = "Insert into main.FoodAndDrink(name, price, categoryID) " +
+                "values(?, ?, ?)";
+        PreparedStatement temp = null;
+        temp = Database.getInstance().getConnection().prepareStatement(query);
+        temp.setString(1, drink.getName());
+        temp.setString(2, drink.getPrice());
+        temp.setString(3, drink.getCategoryID());
+        temp.executeUpdate();
+    }
 }

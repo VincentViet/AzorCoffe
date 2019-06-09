@@ -60,7 +60,7 @@ public class drawerAccountController implements Initializable {
             presenter = new Presenter();
             try {
                 presenter.addToDatabase(account);
-                view.addCurrentData(account);
+                view.addAccount(account);
             }catch (SQLException e){
                 showAlert();
             }

@@ -1,5 +1,6 @@
 package com.azor.manage.manageContent;
 
+import com.azor.AzorCoffee;
 import com.azor.models.Account;
 import com.azor.models.Category;
 import com.azor.models.Drink;
@@ -12,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -77,22 +79,33 @@ public class drawerFoodController implements Initializable {
         presenter.createCategory(tfCategoryName.getText());
     }
 
-//    @FXML
-//    private void addDrink(){
-//        String name = tfDrinkName.getText().toString();
-//        String price = tfPrice.getText().toString();
-//        if ((name.length()!=0) && (price.length()!=0))
-//        {
-//            Drink drink = new Drink(name, price);
-//            Presenter presenter = new Presenter();
-//            try {
-//                presenter.crea;
-//            }catch (SQLException e){
-//                showAlert();
-//            }
-//        }
-//        else {
-//            showAlert();
-//        }
-//    }
+    @FXML
+    private void addDrink(){
+        com.azor.manage.View view = AzorCoffee.fxmlMap.get("manage").getController();
+        String name = tfDrinkName.getText().toString();
+        String price = tfPrice.getText().toString();
+        int categoryID = comboBoxCategory.getSelectionModel().getSelectedItem().getId();
+        Drink drink = new Drink(name, price, categoryID);
+        if ((name.length()!=0) && (price.length()!=0))
+        {
+            Presenter presenter = new Presenter();
+            try {
+                presenter.createDrink(drink);
+                view.addDrink(drink);
+            }catch (SQLException e){
+                showAlert();
+            }
+        }
+        else {
+            showAlert();
+        }
+    }
+
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Missing input or input not match requirement !");
+        alert.setContentText("Please check your input");
+        alert.showAndWait();
+    }
 }

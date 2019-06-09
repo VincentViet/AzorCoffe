@@ -28,7 +28,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <JFXButton layoutX="997.0" layoutY="32.0" text="Confirm" textFill="#6747cd" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="15.0">
+            <JFXButton layoutX="997.0" layoutY="32.0" onAction="#addDrink" text="Confirm" textFill="#6747cd" AnchorPane.leftAnchor="980.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font size="18.0" />
                </font>

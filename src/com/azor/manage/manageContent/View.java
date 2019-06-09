@@ -326,15 +326,19 @@ public class View implements Initializable {
     private void deleteRowDrink(){
         Drink currentSelected = treeviewDrink.getSelectionModel().selectedItemProperty().get().getValue();
         presenter.deleteDrinkInDatabase(currentSelected);
-        listAccount.remove(currentSelected);
+        listDrink.remove(currentSelected);
         final IntegerProperty currCountProp = treeviewDrink.currentItemsCountProperty();
         currCountProp.set(currCountProp.get() - 1);
 
     }
 
 
-    public void addDataToTable(Account account) {
+    public void addAccountToTable(Account account) {
         listAccount.add(account);
+    }
+
+    public void addDrinkToTable(Drink drink){
+        listDrink.add(drink);
     }
 
     // Search bar logic
